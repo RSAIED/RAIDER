@@ -3993,9 +3993,7 @@ send(msg.chat_id_, msg.id_,[[
 
 💠┇[Channel Source ،](t.me/RaiderCli)
 
-💭┇[Annotations Source](t.me/INFO_raider)
-
-💬┇[Communication Source](t.me/Cnstbot)
+💬┇[Communication Source](t.me/RSAIEDBOT)
 
 ━━━━━━━━━━━━━
 ⚜┇[Developer Source !](t.me/RSAIED)
