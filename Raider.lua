@@ -2087,7 +2087,7 @@ end
 if text == 'تفعيل' and DeveloperBot(msg) then
 local url,res = http.request('http://raider.ml/ch/?id='..msg.sender_user_id_)
 data = JSON.decode(url)
-if data.Ch_Member.Info_Raider ~= true then
+if data.Ch_Raider.Info_Raider ~= true then
 send(msg.chat_id_,msg.id_,'\n📌┇عليك الاشتراك في قناة البوت \n💢┇قناة البوت ← { @RaiderCli }')   
 return false 
 end 
@@ -2146,7 +2146,7 @@ end
 if text == 'تعطيل' and DeveloperBot(msg) then
 local url,res = http.request('http://raider.ml/ch/?id='..msg.sender_user_id_)
 data = JSON.decode(url)
-if data.Ch_Member.Info_Raider ~= true then
+if data.Ch_Raider.Info_Raider ~= true then
 send(msg.chat_id_,msg.id_,'\n📌┇عليك الاشتراك في قناة البوت \n💢┇قناة البوت ← { @RaiderCli }')   
 return false 
 end 
@@ -2190,7 +2190,7 @@ end
 if text == 'تفعيل' and not DeveloperBot(msg) and not redis:get(bot_id..'Free:Bot') then
 local url,res = http.request('http://raider.ml/ch/?id='..msg.sender_user_id_)
 data = JSON.decode(url)
-if data.Ch_Member.Info_Raider ~= true then
+if data.Ch_Raider.Info_Raider ~= true then
 send(msg.chat_id_,msg.id_,'\n📌┇عليك الاشتراك في قناة البوت \n💢┇قناة البوت ← { @RaiderCli }')   
 return false 
 end 
