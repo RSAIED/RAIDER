@@ -31,7 +31,7 @@ if not redis:get(Server_DevRaider.."User_DevRaider1") then
 io.write('\n\27[1;35m⬇┇Send UserName For Sudo : ارسل معرف المطور الاساسي ...\n\27[0;39;49m')
 local User_Sudo = io.read():gsub('@','')
 if User_Sudo ~= '' then
-local RaiderInfo = http.request("http://raider.ml/GetUser?id="..User_Sudo)
+local RaiderInfo = http.request("http://raider.ml/GetUser?user="..User_Sudo)
 local Raider_Dev_info = JSON.decode(RaiderInfo)
 if Raider_Dev_info.information.status == "invalid" then
 io.write('\n\27[1;31m The UserName was not Saved : المعرف غلط ارسل المعرف صحيح\n\27[0;39;49m')
