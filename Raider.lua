@@ -15,7 +15,8 @@ io.write('\n\27[1;35m⬇┇Send Token For Bot : ارسل توكن البوت ...
 local token = io.read()
 if token ~= '' then
 local url , res = https.request('https://api.telegram.org/bot'..token..'/getMe')
-local Get_UserBot = JSON.decode(res)
+local RaideGetBot = https.request('https://api.telegram.org/bot'..token..'/getMe')
+local Get_UserBot = JSON.decode(RaideGetBot)
 if res ~= 200 then
 io.write('\n\27[1;31m🔄┇Token Is Communication Error\n التوكن غلط جرب مره اخره \n\27[0;39;49m')
 else
