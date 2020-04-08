@@ -33,11 +33,11 @@ local User_Sudo = io.read():gsub('@','')
 if User_Sudo ~= '' then
 local RaiderInfo = http.request("http://raider.ml/GetUser?user="..User_Sudo)
 local RaideGetInfo = JSON.decode(RaiderInfo)
-if RaideGetInfo.information.status == "invalid" then
+if RaideGetInfo.information.status == 'invalid' then
 io.write('\n\27[1;31m The UserName was not Saved : المعرف غلط ارسل المعرف صحيح\n\27[0;39;49m')
 os.execute('lua Raider.lua')
 end
-if RaideGetInfo.information.status == "Spammer" then
+if RaideGetInfo.information.status == 'Spammer' then
 io.write('\n\27[1;31m🔄┇Is Spam For Url : لقد قمت بالتكرار في الرابط حاول بعد دقيقتين \n\27[0;39;49m')
 os.execute('lua Raider.lua')
 end
